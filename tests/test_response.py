@@ -9,7 +9,7 @@ from vase.response import (
 
 class HttpResponseTests(unittest.TestCase):
     def test_status_line(self):
-        self.assertEqual(status_line(404), b'404 Not Found')
+        self.assertEqual(status_line(404), '404 Not Found')
 
     def test_http_response(self):
         resp = HttpResponse(b'foo')
@@ -22,9 +22,8 @@ class HttpResponseTests(unittest.TestCase):
         start_response = unittest.mock.Mock()
         resp(start_response)
 
-        start_response.assert_called_with(b'200 OK', [
+        start_response.assert_called_with('200 OK', [
             (b'Content-Encoding', b'UTF-8'),
             (b'Content-Type', b'text/html'),
             (b'Content-Length', str(len(b'foo')).encode('ascii')),
         ])
-
