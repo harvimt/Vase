@@ -51,7 +51,7 @@
           new_uri = "ws:";
         }
         new_uri += "//" + loc.host;
-        new_uri += loc.pathname + "ws/chat?" + username;
+        new_uri += loc.pathname + "ws/chat?username=" + username;
 
         ws = new WebSocket(new_uri);
         ws.onmessage = function(e) {
