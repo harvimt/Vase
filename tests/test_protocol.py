@@ -1,7 +1,5 @@
 from tests.util import BaseLoopTestCase
-from vase.http import (
-    HttpRequest,
-)
+from vase.http import HttpRequest
 from vase.protocol import BaseHttpProtocol
 
 class BaseHttpProtocolTests(BaseLoopTestCase):
