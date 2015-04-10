@@ -6,3 +6,6 @@ dist
 htmlcov
 cover
 .idea
+tests.test_ws*
+*.log
+build/
