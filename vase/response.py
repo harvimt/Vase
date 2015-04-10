@@ -8,7 +8,7 @@ STATUS_MAP = BaseHTTPRequestHandler.responses
 
 def status_line(status):
     line = STATUS_MAP[status][0]
-    return "{} {}".format(status, line).encode('ascii')
+    return "{} {}".format(status, line)
 
 
 class HttpResponse:
