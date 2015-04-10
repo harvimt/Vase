@@ -1,18 +1,20 @@
 from multiprocessing import Process
 import pytest
-import asyncio
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def wschat(request):
-    from examples.wschat import app
-    proc = Process(target=app.run)
+    def run_wschat():
+        from examples.wschat import app
+        app.run(port=3002)
+    proc = Process(target=run_wschat)
     proc.start()
     request.addfinalizer(proc.terminate)
 
 
+@pytest.mark.slow
 def test_wschat(browser, wschat):
-    browser.visit('http://localhost:3000')
+    browser.visit('http://localhost:3002')
     browser.find_by_id('login-input').type('johndoe\r')
     browser.find_by_id('chat-input').type('Hello World!\r')
     line1, line2 = browser.find_by_css('.chat-window')[0].text.splitlines()

@@ -7,11 +7,14 @@ from vase.response import HttpResponse
 
 app = Vase(__name__)
 
-html_body = open(os.path.join(os.path.dirname(__file__), 'main.html'), 'r').read()
+html_body =\
+    open(os.path.join(os.path.dirname(__file__), 'main.html'), 'r').read()
+
 
 @app.route(path="/")
 def hello(request):
     return html_body
+
 
 @app.endpoint(path="/ws/chat", with_sockjs=False)
 class Endpoint:
@@ -40,7 +43,6 @@ class Endpoint:
     def broadcast(self, message):
         for username, transport in self.bag['users'].items():
             transport.send(message)
-
 
     def on_close(self, exc=None):
         users = self.bag['users']
