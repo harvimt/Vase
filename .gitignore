@@ -9,3 +9,4 @@ cover
 tests.test_ws*
 *.log
 build/
+.tox
