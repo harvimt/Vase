@@ -5,7 +5,7 @@ Vase is a webframework for Tulip/asyncio
   :target:  https://secure.travis-ci.org/harvimt/Vase
 
 Inspired by Flask
-It currently has a basic HTTP interface and WebSocket support.
+It currently has a basic HTTP interface and WebSocket (and SockJS) support.
 A demo websocket app is available here http://vase-chat.herokuapp.com/
 
 Sample echo app
