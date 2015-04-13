@@ -1,5 +1,5 @@
 import asyncio
-from asyncio.streams import StreamWriter, IncompleteReadError
+from asyncio.streams import StreamWriter
 import collections
 import struct
 from enum import Enum
@@ -176,7 +176,7 @@ class WebSocketParser:
         while True:
             try:
                 frame = yield from self.parse_frame(self._reader)
-            except IncompleteReadError:
+            except EOFError:
                 frame = None
             if frame is None:
                 return
