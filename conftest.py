@@ -1,8 +1,5 @@
-import sys
-import os.path
 import pytest
 import asyncio
-sys.path.append(os.path.dirname(__file__))
 
 
 @pytest.fixture(autouse=True)
