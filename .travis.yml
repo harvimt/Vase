@@ -6,7 +6,6 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - "pip install pytest-cov pytest-splinter"
-  - "[ python --version 2>&1 | grep -q '^Python 3\.3\.' ] && pip install asyncio enum34"
+  - "pip install pytest-cov pytest-splinter asyncio enum34"
   - "python setup.py develop"
 script: "py.test --cov vase --runslow"
