@@ -4,5 +4,5 @@ python:
   - "3.4"
 install:
   - "python setup.py develop"
-  - "pip install coverage"
-script: "python runtests.py --coverage"
+  - "pip install pytest-cov splinter"
+script: "py.test --cov vase"
