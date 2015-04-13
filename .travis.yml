@@ -6,6 +6,6 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - "pip install pytest-cov splinter asyncio"
+  - "pip install pytest-cov pytest-splinter asyncio"
   - "python setup.py develop"
 script: "py.test --cov vase --runslow"
