@@ -10,3 +10,4 @@ tests.test_ws*
 *.log
 build/
 .tox
+.hypothesis
