@@ -6,6 +6,6 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - "pip install pytest-cov pytest-splinter hypothesis-pytest asyncio enum34"
+  - "pip install boltons pytest-cov pytest-splinter hypothesis-pytest asyncio enum34"
   - "python setup.py develop"
 script: "py.test --cov vase --runslow"
