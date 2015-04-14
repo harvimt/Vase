@@ -10,7 +10,7 @@ import urllib.parse
 
 from .stream import LimitedReader
 from .exceptions import BadRequestException
-from .util import MultiDict
+from boltons.dictutils import MultiDict
 
 from collections import OrderedDict
 
@@ -64,7 +64,7 @@ class HttpRequest(EmailMessage):
     @property
     def GET(self):
         if self._get is None:
-            self._get = MultiDict(urllib.parse.parse_qs(self.querystring, keep_blank_values=True))
+            self._get = MultiDict(urllib.parse.parse_qsl(self.querystring, keep_blank_values=True))
         return self._get
 
     @property
@@ -105,7 +105,7 @@ class HttpRequest(EmailMessage):
             return
         if self._has_form():
             body = yield from self.body.read()
-            self.POST = MultiDict(urllib.parse.parse_qs(body.decode('utf-8')))
+            self.POST = MultiDict(urllib.parse.parse_qsl(body.decode('utf-8')))
         self._post_inited = True
 
 

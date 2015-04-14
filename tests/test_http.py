@@ -11,7 +11,7 @@ from vase.http import (
     BadRequestException,
     _FORM_URLENCODED,
 )
-from vase.util import MultiDict
+from boltons.dictutils import MultiDict
 
 
 class RequestTests(unittest.TestCase):
@@ -28,8 +28,8 @@ class RequestTests(unittest.TestCase):
 
     def test_request(self):
         req = self._get_request()
-        self.assertEqual(req.GET, MultiDict(foo=['bar'], baz=['']))
-        self.assertEqual(req.GET, MultiDict(foo=['bar'], baz=['']))
+        self.assertEqual(req.GET, MultiDict([('foo', 'bar'), ('baz', '')]))
+        self.assertEqual(req.GET, MultiDict([('foo', 'bar'), ('baz', '')]))
 
     def test_has_form(self):
         req = self._get_request()
@@ -58,7 +58,7 @@ class RequestTests(unittest.TestCase):
         loop.call_soon(feed)
 
         loop.run_until_complete(task)
-        self.assertEqual(req.POST, MultiDict(foo=['bar'], baz=['far']))
+        self.assertEqual(req.POST, MultiDict(foo='bar', baz='far'))
 
         req = self._get_request()
         stream._eof = False
