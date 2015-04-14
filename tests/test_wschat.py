@@ -1,5 +1,6 @@
 from multiprocessing import Process
 import pytest
+from hypothesis import given, strategy
 
 
 @pytest.fixture(scope='session')
@@ -12,11 +13,15 @@ def wschat(request):
     request.addfinalizer(proc.terminate)
 
 
+non_empty_str = strategy(str).filter(bool)
+
+
 @pytest.mark.slow
-def test_wschat(browser, wschat):
+@given(uname=non_empty_str, msg=non_empty_str)
+def test_wschat(browser, wschat, uname, msg):
     browser.visit('http://localhost:3002')
-    browser.find_by_id('login-input').type('johndoe\r')
-    browser.find_by_id('chat-input').type('Hello World!\r')
+    browser.find_by_id('login-input').type(uname + '\r')
+    browser.find_by_id('chat-input').type(msg + '\r')
     line1, line2 = browser.find_by_css('.chat-window')[0].text.splitlines()
-    assert line1 == "User 'johndoe' entered chat"
-    assert line2.endswith(' johndoe: Hello World!')
+    assert line1 == "User '{}' entered chat".format(uname)
+    assert line2.endswith(' {}: {}'.format(uname, msg))
